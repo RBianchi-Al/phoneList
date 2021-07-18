@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import { Formik, Field, Form } from 'formik';
 import {
   Container,
@@ -8,10 +9,42 @@ import {
 
 } from '@material-ui/core'
 import { useStyles } from './styles'
+import { useAuth } from '../../hooks/useAuth';
+import {database} from '../../services/firebase'
+
 
 export default function Register() {
-  function onSubmit(values, actions) {
+  
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
+  const {user} = useAuth()
+
+
+async  function onSubmit(values, actions) {
     console.log('SUBMIT', values);
+    if(name.trim() === ''){
+        return
+      }
+      if(email.trim() === ''){
+        return
+      }
+      if(phone.trim() === ''){
+        return
+      }
+      if(number.trim() === ''){
+        return
+      }
+  
+      const phoneRef = database.ref('phone');
+      const firebasePhone = await phoneRef.push({
+        userId: user?.id,
+        numberPhone: phone,
+        emailId: email,
+        
+      });
+  
   }
 
   function onBlurCep(ev, setFieldValue) {
@@ -30,7 +63,9 @@ export default function Register() {
         setFieldValue('bairro', data.bairro);
         setFieldValue('cidade', data.localidade);
         setFieldValue('uf', data.uf);
+        
       });
+
   }
 
   const classes = useStyles();
@@ -43,8 +78,7 @@ export default function Register() {
         numero: '',
         complemento: '',
         bairro: '',
-        cidade: '',
-        uf: '',
+        cidade: ''
       }}
       render={({ isValid, setFieldValue }) => (
         <Form className={classes.form}>
@@ -61,6 +95,8 @@ export default function Register() {
                   fullWidth
                   autoComplete="family-name"
                   type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -71,7 +107,9 @@ export default function Register() {
                   label="Telefone"
                   fullWidth
                   autoComplete="shipping address-line1"
-                  type="number"
+                  type="text"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -82,6 +120,8 @@ export default function Register() {
                   type="Email"
                   fullWidth
                   autoComplete="shipping address-line2"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
               <Grid container spacing={1}>
@@ -109,7 +149,9 @@ export default function Register() {
                 placeholder="Número"
                 name="numero" 
                 type="text" 
-                className={classes.inputCEP} />
+                className={classes.inputCEP} 
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}/>
               </Grid>
               <Grid item xs={12}>
                 <Button type="submit" disabled={!isValid} variant="contained" className={classes.button} color="secondary" >Cadastrar</Button>

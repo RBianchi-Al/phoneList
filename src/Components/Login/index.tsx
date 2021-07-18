@@ -1,6 +1,5 @@
-import {useHistory} from 'react-router-dom';
-import { AuthContext } from '../../App';
-import { useContext } from 'react';
+import { useHistory} from 'react-router-dom';
+import {FormEvent} from 'react'
 import {Avatar, 
         Button,
         CssBaseline, 
@@ -10,14 +9,16 @@ import {Avatar,
         Typography
       } from "@material-ui/core"
 import {useStyles} from './styles'
+import { useAuth } from '../../hooks/useAuth';
 
 export default function Login() {
   const classes = useStyles();
   const history = useHistory();
-  const { signInWithGoogle, user } = useContext(AuthContext);
+  const { signInWithGoogle, user } = useAuth();
  
-  async function handleLogin(e:any){
-    e.preventDefault()
+
+  async function handleLogin(event: FormEvent){
+    event.preventDefault()
     if (!user) {
       await signInWithGoogle()
      }

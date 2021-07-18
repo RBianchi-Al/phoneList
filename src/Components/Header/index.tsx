@@ -1,4 +1,6 @@
-import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
+
 import {
   AppBar,  
   Toolbar,
@@ -10,15 +12,12 @@ import {
 } from '@material-ui/core';
 import { useStyles } from './styles';
 
-import { useHistory } from 'react-router-dom'
-import { AuthContext } from '../../App';
-
 
 
 export default function Header() {
   const classes = useStyles();
   const history = useHistory();
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth()
  
   function handleLogin() {
     history.push('/login')
@@ -37,13 +36,13 @@ export default function Header() {
             <strong className={classes.titleuser}>{user?.name}</strong> 
           </Typography>
         </ListItem>
-        <Button
+        {/* <Button
             variant="outlined"
             color="primary"
             onClick={handleLogin}
             className={classes.button}>
             Cadastrar
-          </Button>
+          </Button> */}
           
         <Button
             variant="outlined"
@@ -57,4 +56,4 @@ export default function Header() {
       </AppBar>
     </>
   );
-}
+  }

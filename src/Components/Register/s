@@ -1,0 +1,29 @@
+  function onSubmit(values, actions) {
+    console.log('SUBMIT', values);
+    // if(name.trim() === ''){
+    //   return
+    // }
+    // if(email.trim() === ''){
+    //   return
+    // }
+    // if(phone.trim() === ''){
+    //   return
+    // }
+    // if(numero.trim() === ''){
+    //   return
+    // }
+
+    // const roomRef = database.ref('phone');
+    // const firebaseRoom = await roomRef.push({
+    //   userId: user?.id,
+    //   numberPhone: phone,
+    //   road: rua,
+
+
+    // });
+
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [numero, setNumero] = useState('');
