@@ -2,7 +2,7 @@ import { useState, createContext, useEffect } from 'react'
 import Login from './Components/Login/index'
 import { GlobalStyle } from './Styles/global'
 import { Route, BrowserRouter } from 'react-router-dom'
-import Home from './Components/Header';
+import Home from './Pages/Home'
 import { auth, firebase } from './services/firebase';
 
 type User = {
