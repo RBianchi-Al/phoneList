@@ -3,6 +3,22 @@ export const useStyles = makeStyles((theme) => ({
     icon: {
       marginRight: theme.spacing(2),
     },
+    button: {
+      margin: theme.spacing(2, 5),
+      
+    },
+    title: {
+      fontSize: '12px'
+      
+    },
+    titleuser: {
+      fontSize: '15px'
+      
+    },
+    toolbar:{
+        backgroundColor: "#161a1d",
+        justifyContent: "space-between"
+    },
     heroContent: {
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(8, 0, 6),

@@ -1,3 +1,6 @@
+import {useHistory} from 'react-router-dom';
+import { AuthContext } from '../../App';
+import { useContext } from 'react';
 import {Avatar, 
         Button,
         CssBaseline, 
@@ -10,6 +13,18 @@ import {useStyles} from './styles'
 
 export default function Login() {
   const classes = useStyles();
+  const history = useHistory();
+  const { signInWithGoogle, user } = useContext(AuthContext);
+ 
+  async function handleLogin(e:any){
+    e.preventDefault()
+    if (!user) {
+      await signInWithGoogle()
+     }
+    
+    history.push('/home')
+      
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -52,6 +67,7 @@ export default function Login() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={handleLogin}
             >
               Entrar
             </Button>
