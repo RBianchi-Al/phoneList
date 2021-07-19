@@ -40,6 +40,7 @@ type FirebasePhone = Record<string, {
     name: string;
     numberPhone: string;
     userId: string;
+    numberHouse?: string | undefined;
 
     
 }>
@@ -54,12 +55,13 @@ type CardPhone = {
         logradouro?: string;
         numero: string;
         uf?: string;
+        
     };
     emailId: string;
     name: string;
     numberPhone: string;
     userId: string;
-    
+    numberHouse?: string | undefined;
 }
 
 
@@ -78,10 +80,6 @@ export default function Cards() {
     useEffect(() => {
 
         const phonesDb = database.ref('phone')
-
-        
-        
-        
         phonesDb.on('value', phones => {
             const databasePhone = phones.val();
             const firebasePhone: FirebasePhone = databasePhone ?? {};
@@ -97,6 +95,8 @@ export default function Cards() {
                     userId: value.userId,
                     adress: value.adress,
                     emailId: value.emailId, 
+                    numberHouse: value.numberHouse
+                    
                 }
             })
 
@@ -110,10 +110,11 @@ export default function Cards() {
     return (
         <>
             <Container className={classes.cardGrid} maxWidth="md" >
+               
                 <h1>{cardPhone.length > 0 && <span> Olá {user?.name}, você tem {cardPhone.length} contatos o/ </span> }</h1>
                 <Grid container spacing={1}>
-                    {cards.map((card) => (
-                        <Grid item key={card} xs={4} sm={9} md={4}>
+                    {cardPhone.map((card) => (
+                        <Grid item key={card.id} xs={4} sm={9} md={4}>
                             <Card className={classes.card}>
                                 <CardMedia
                                     className={classes.cardMedia}
@@ -122,25 +123,32 @@ export default function Cards() {
                                 />
                                 <CardContent className={classes.cardContent}>
                                     <Typography gutterBottom variant="h5" component="h2">
-
+                                        {card.name}
                                     </Typography>
                                     <ListItem>
                                         <ListItemIcon>
                                             <PhoneIcon />
                                         </ListItemIcon>
-                                        <ListItemText>16-99789587</ListItemText>
+                                        <ListItemText>{card.numberPhone} </ListItemText>
                                     </ListItem>
                                     <ListItem>
                                         <ListItemIcon>
                                             <HomeIcon />
                                         </ListItemIcon>
-                                        <ListItemText>14487-985, Rua das Alamedas, 5545</ListItemText>
+                                        <ListItemText>{`
+                                        R.: ${card.adress.logradouro}
+                                        R.: ${card.numberHouse}
+                                        Bairro: ${card.adress.bairro}
+                                        Cidade: ${card.adress.cidade}
+                                        UF: ${card.adress.uf}
+                                        CEP: ${card.adress.cep}
+                                        `} </ListItemText>
                                     </ListItem>
                                     <ListItem>
                                         <ListItemIcon>
                                             <MailOutlineIcon />
                                         </ListItemIcon>
-                                        <ListItemText>j@gmail.com</ListItemText>
+                                        <ListItemText>{card.emailId} </ListItemText>
                                     </ListItem>
 
                                 </CardContent>
@@ -148,7 +156,7 @@ export default function Cards() {
                         </Grid>
                     ))}
                 </Grid>
-                {JSON.stringify(cardPhone)}
+
             </Container>
         </>
     )

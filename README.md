@@ -1,13 +1,13 @@
 Desafio: 
-[] Cadastro de contatos 
-[] Busca de endereço usando node-cep
+[x] Cadastro de contatos 
+[x] Busca de endereço usando node-cep
 [] Envio de notificação assíncrona
 [] Categorização e agrupamento
 [] Busca de contatos com sugestão de pesquisa
-[] Autenticação - acessar só após o login
-[] Responsividade
-[] Formulários de cadastro devem possuir validação front e back-end
-[] React, nodeJS, Firebase
+[x] Autenticação - acessar só após o login
+[x] Responsividade
+[x] Formulários de cadastro devem possuir validação front e back-end
+[x] React, nodeJS, Firebase
 
 
 Para rodar esse projeto, basta inserir no terminal:
