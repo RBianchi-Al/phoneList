@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import { useHistory } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import {
   Container,
@@ -13,17 +14,28 @@ import { useAuth } from '../../hooks/useAuth';
 import {database} from '../../services/firebase'
 
 
+
 export default function Register() {
-  
+  const history = useHistory();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [number, setNumber] = useState('');
+  const [value, setFieldValue] = useState('')
   const {user} = useAuth()
 
-
+  const initialValues = {
+    cep: '',
+    logradouro: '',
+    numero: '',
+    complemento: '',
+    bairro: '',
+    cidade: ''
+  }
 async  function onSubmit(values, actions) {
-    console.log('SUBMIT', values);
+    // console.log('SUBMIT', values);
+
+  
     if(name.trim() === ''){
         return
       }
@@ -40,11 +52,22 @@ async  function onSubmit(values, actions) {
       const phoneRef = database.ref('phone');
       const firebasePhone = await phoneRef.push({
         userId: user?.id,
+        name: name,
         numberPhone: phone,
         emailId: email,
-        
+        adress: values
       });
-  
+
+      // console.log(firebasePhone)
+
+      // history.push(`/`)
+
+      setName('')
+      setNumber('')
+      setEmail('')
+      setPhone('')
+      
+
   }
 
   function onBlurCep(ev, setFieldValue) {
@@ -63,23 +86,16 @@ async  function onSubmit(values, actions) {
         setFieldValue('bairro', data.bairro);
         setFieldValue('cidade', data.localidade);
         setFieldValue('uf', data.uf);
-        
-      });
+        setFieldValue('cep', data.cep);
 
+      });
   }
 
   const classes = useStyles();
   return (
     <Formik onSubmit={onSubmit}
       validateOnMount
-      initialValues={{
-        cep: '',
-        logradouro: '',
-        numero: '',
-        complemento: '',
-        bairro: '',
-        cidade: ''
-      }}
+      initialValues={initialValues}
       render={({ isValid, setFieldValue }) => (
         <Form className={classes.form}>
           
@@ -154,7 +170,12 @@ async  function onSubmit(values, actions) {
                 onChange={(e) => setNumber(e.target.value)}/>
               </Grid>
               <Grid item xs={12}>
-                <Button type="submit" disabled={!isValid} variant="contained" className={classes.button} color="secondary" >Cadastrar</Button>
+                <Button 
+                type="submit" 
+                disabled={!isValid} 
+                variant="contained" 
+                className={classes.button} 
+                color="secondary" >Cadastrar</Button>
               </Grid>
             </Grid>
          

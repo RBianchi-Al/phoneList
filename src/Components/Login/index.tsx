@@ -1,5 +1,8 @@
-import { useHistory} from 'react-router-dom';
 import {FormEvent} from 'react'
+
+import { useAuth } from '../../hooks/useAuth';
+import { useHistory} from 'react-router-dom';
+
 import {Avatar, 
         Button,
         CssBaseline, 
@@ -9,7 +12,7 @@ import {Avatar,
         Typography
       } from "@material-ui/core"
 import {useStyles} from './styles'
-import { useAuth } from '../../hooks/useAuth';
+
 
 export default function Login() {
   const classes = useStyles();
@@ -26,7 +29,7 @@ export default function Login() {
     history.push('/home')
       
   }
-
+ 
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />

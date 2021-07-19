@@ -1,12 +1,13 @@
-import Header from '../Components/Header';
+import Header from '../Components/Header'
 import Cards from '../Components/Cards'
-import Register from '../Components/Register'
+import Search from '../Components/SearchField/Search'
+
 export default function Home() {
     return (
         <>
             <Header />
-            <Register />
-            <Cards />
+            <Search/>
+            <Cards/>
         </>
     )
 }

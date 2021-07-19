@@ -20,9 +20,14 @@ export default function Header() {
   const { user } = useAuth()
  
   function handleLogin() {
-    history.push('/login')
+    history.push('/')
   }
-
+  function handleRegister(){
+    history.push('/register')
+  }
+  function handlePhones(){
+    history.push('/home')
+  }
 
   return (
     <>
@@ -36,14 +41,20 @@ export default function Header() {
             <strong className={classes.titleuser}>{user?.name}</strong> 
           </Typography>
         </ListItem>
-        {/* <Button
+        <Button
             variant="outlined"
-            color="primary"
-            onClick={handleLogin}
+            color="inherit"
+            onClick={handleRegister}
             className={classes.button}>
             Cadastrar
-          </Button> */}
-          
+          </Button>
+          <Button
+            variant="outlined"
+            color="inherit"
+            onClick={handlePhones}
+            className={classes.button}>
+            Contatos
+          </Button>
         <Button
             variant="outlined"
             color="secondary"
