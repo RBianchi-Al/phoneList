@@ -58,15 +58,12 @@ async  function onSubmit(values, actions) {
         adress: values
       });
 
-      // console.log(firebasePhone)
-
-      // history.push(`/`)
-
       setName('')
       setNumber('')
       setEmail('')
       setPhone('')
-      
+
+      history.push('/home')
 
   }
 

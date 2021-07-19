@@ -21,6 +21,7 @@ import {
 import PhoneIcon from '@material-ui/icons/Phone';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import HomeIcon from '@material-ui/icons/Home';
+import { useAuth } from '../../hooks/useAuth';
 
 
 const cards = [1, 2, 3];
@@ -30,13 +31,17 @@ type FirebasePhone = Record<string, {
         bairro: string;
         cep: string;
         cidade: string;
-        complemento: string;
-        logradouro: string;
-    }
+        complemento?: string;
+        logradouro?: string;
+        numero: string;
+        uf?: string;
+    };
     emailId: string;
     name: string;
     numberPhone: string;
     userId: string;
+
+    
 }>
 
 type CardPhone = {
@@ -45,14 +50,16 @@ type CardPhone = {
         bairro: string;
         cep: string;
         cidade: string;
-        complemento: string;
-        logradouro: string;
-    }
+        complemento?: string;
+        logradouro?: string;
+        numero: string;
+        uf?: string;
+    };
     emailId: string;
     name: string;
     numberPhone: string;
     userId: string;
-
+    
 }
 
 
@@ -63,30 +70,38 @@ type PhotosParams = {
 export default function Cards() {
 
     const classes = useStyles();
+    const {user} = useAuth()
     const params = useParams<PhotosParams>()
     const [cardPhone, setCardPhone] = useState<CardPhone[]>([])
-    const [title, setTitle] = useState('')
-    const photosId = params.id
+    const phoneId = params.id
+    
     useEffect(() => {
 
         const phonesDb = database.ref('phone')
 
-        phonesDb.once('value', phone => {
-            const databasePhone = phone.val();
-            const firebasePhone: FirebasePhone = databasePhone.phoneDb ?? {};
+        
+        
+        
+        phonesDb.on('value', phones => {
+            const databasePhone = phones.val();
+            const firebasePhone: FirebasePhone = databasePhone ?? {};
 
-            const parsePhone = Object.entries(firebasePhone).map(([key, value]) => {
+            console.log(databasePhone)
+
+            const parsePhone = Object.entries(firebasePhone).map(
+                ([key, value]) => {
                 return {
                     id: key,
                     name: value.name,
                     numberPhone: value.numberPhone,
                     userId: value.userId,
                     adress: value.adress,
+                    emailId: value.emailId, 
                 }
             })
 
-            setTitle(databasePhone.title)
             setCardPhone(parsePhone)
+            
             
         })
     }, [])
@@ -95,6 +110,7 @@ export default function Cards() {
     return (
         <>
             <Container className={classes.cardGrid} maxWidth="md" >
+                <h1>{cardPhone.length > 0 && <span> Olá {user?.name}, você tem {cardPhone.length} contatos o/ </span> }</h1>
                 <Grid container spacing={1}>
                     {cards.map((card) => (
                         <Grid item key={card} xs={4} sm={9} md={4}>
@@ -132,6 +148,7 @@ export default function Cards() {
                         </Grid>
                     ))}
                 </Grid>
+                {JSON.stringify(cardPhone)}
             </Container>
         </>
     )
