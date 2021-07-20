@@ -39,7 +39,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             color: 'inherit',
         },
         toolbar:{
-            backgroundColor: alpha('#161a1d', 0.55),
+            background: '#757575'
            
         },
         inputInput: {

@@ -1,50 +1,79 @@
-import { makeStyles } from '@material-ui/core/styles';
-export const useStyles = makeStyles((theme) => ({
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+
+const drawerWidth = 150;
+// cor #161a1d
+
+export const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+  title: {
+    fontSize: '12px'
+
+  },
+  titleuser: {
+    fontSize: '15px'
+
+  },
+    root: {
+      display: 'flex',
+    },
+    appBar: {
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      background:'#161a2d',
+    },
+    appBarShift: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      background:'#161a2d',
+     
+    },
+    menuButton: {
+      margin: theme.spacing(0,1,0,2),
+      cursor: 'pointer',
+    },
+    hide: {
+      display: 'none',
+    },
+    drawer: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
     icon: {
       marginRight: theme.spacing(2),
     },
-    button: {
-      margin: theme.spacing(2),
-      padding: theme.spacing(1,4,1,4),
-      
+    drawerPaper: {
+      width: drawerWidth,
     },
-    title: {
-      fontSize: '12px'
-      
-    },
-    titleuser: {
-      fontSize: '15px'
-      
-    },
-    toolbar:{
-        backgroundColor: "#161a1d",
-        justifyContent: "space-between"
-    },
-    heroContent: {
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(8, 0, 6),
-    },
-    heroButtons: {
-      marginTop: theme.spacing(4),
-    },
-    cardGrid: {
-      paddingTop: theme.spacing(8),
-      paddingBottom: theme.spacing(8),
-    },
-    card: {
-      height: '100%',
+    drawerHeader: {
       display: 'flex',
-      flexDirection: 'column',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-end',
     },
-    cardMedia: {
-      paddingTop: '56.25%', // 16:9
-    },
-    cardContent: {
+    content: {
       flexGrow: 1,
+ 
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      marginLeft: -drawerWidth,
     },
-    footer: {
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(6),
+    contentShift: {
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: 0,
     },
-  }));
-  
+    
+  }),
+);

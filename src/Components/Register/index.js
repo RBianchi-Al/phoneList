@@ -21,7 +21,6 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [number, setNumber] = useState('');
-  const [value, setFieldValue] = useState('')
   const {user} = useAuth()
 
   const initialValues = {
@@ -65,6 +64,7 @@ async  function onSubmit(values, actions) {
       setPhone('')
 
       history.push('/home')
+      console.log(firebasePhone)
 
   }
 

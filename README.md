@@ -2,7 +2,7 @@ Desafio:
 [x] Cadastro de contatos 
 [x] Busca de endereço usando node-cep
 [] Envio de notificação assíncrona
-[] Categorização e agrupamento
+[x] Categorização e agrupamento
 [] Busca de contatos com sugestão de pesquisa
 [x] Autenticação - acessar só após o login
 [x] Responsividade
