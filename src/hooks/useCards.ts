@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { database } from '../services/firebase'
+import { useAuth } from './useAuth';
 
 type FirebasePhone = Record<string, {
     adress: {
@@ -40,11 +41,10 @@ type CardPhone = {
 }
 
 
-
 export function useCards(){
-    
     const [cardPhone, setCardPhone] = useState<CardPhone[]>([])
-
+    const {user} = useAuth()
+    
     useEffect(() => {
 
         const phonesDb = database.ref('phone')
@@ -69,13 +69,15 @@ export function useCards(){
 
             })
 
-            setCardPhone(parsePhone) 
             
+            setCardPhone(parsePhone)    
+
+
         })
         return () => {
             phonesDb.off('value')
         }
-    }, [])
+    }, [user?.id])
 
    
     

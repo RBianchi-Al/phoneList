@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import {
   Container,
@@ -22,6 +22,8 @@ export default function Register() {
   const [phone, setPhone] = useState('');
   const [number, setNumber] = useState('');
   const {user} = useAuth()
+  const params = useParams()
+  const roomId = params.id
 
   const initialValues = {
     cep: '',
@@ -33,8 +35,6 @@ export default function Register() {
   }
 async  function onSubmit(values, actions) {
     // console.log('SUBMIT', values);
-
-  
     if(name.trim() === ''){
         return
       }
@@ -48,24 +48,33 @@ async  function onSubmit(values, actions) {
         return
       }
   
-      const phoneRef = database.ref('phone');
-      const firebasePhone = await phoneRef.push({
+      if(!user){
+        throw new Error('You must be logged in')
+     }
+
+
+     const phoneRef = database.ref('phone');
+     
+     const firebasePhone = await phoneRef.push({
         userId: user?.id,
         name: name,
         numberPhone: phone,
         numberHouse: number,
         emailId: email,
         adress: values
+
       });
 
+      history.push(`/home`)
+
+      // history.push(`/home`)
+    
+      
+      
       setName('')
       setNumber('')
       setEmail('')
       setPhone('')
-
-      history.push('/home')
-      console.log(firebasePhone)
-
   }
 
   function onBlurCep(ev, setFieldValue) {

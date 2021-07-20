@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import clsx from 'clsx';
-import { useTheme} from '@material-ui/core/styles';
 
+// css
+import clsx from 'clsx';
+import { useTheme } from '@material-ui/core/styles';
 import {
   Drawer,
   CssBaseline,
@@ -30,36 +31,25 @@ import { useStyles } from './styles';
 export default function Header() {
   const classes = useStyles();
   const theme = useTheme();
+
   const [open, setOpen] = useState(false);
-
-
   const history = useHistory();
-  const { user } = useAuth()
+  const { user, logOut } = useAuth()
 
- function signOutUser() {
-    // await database.ref('phone').update({
-    //   endedAt: new Date(),
-      
-    // })
-    
- 
-  //  firebase.auth().signOut().then(function() {
-  //      auth.signOut()
-       history.push('/')
-        // Sign-out successful.
+  // sair
+  function signOutUser() {
+    logOut()
+    history.push('/')
 
-    //    console.log('deu certo sair')
-    //  }).catch(function(error) {
-    //     // An error happened.
-    //  });
   }
 
 
   function handleRegister() {
     history.push('/register')
   }
+
   function handlePhones() {
-    history.push('/cadastrar')
+    history.push(`/home`)
   }
 
 
@@ -90,7 +80,7 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <Avatar className={classes.icon} src={user?.avatar}/>
+          <Avatar className={classes.icon} src={user?.avatar} />
           <Typography className={classes.title} color="inherit" noWrap>
             Bem vind@, <br />
             <strong className={classes.titleuser}>{user?.name}</strong>
@@ -114,7 +104,7 @@ export default function Header() {
         </div>
         <Divider />
         <List >
-          <ListItem className={classes.menuButton}> 
+          <ListItem className={classes.menuButton}>
             <PhoneIcon />
             <ListItemText
               onClick={handleRegister}

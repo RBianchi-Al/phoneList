@@ -1,3 +1,4 @@
+import { useParams } from 'react-router';
 import { useAuth } from '../../hooks/useAuth';
 import { useCards } from '../../hooks/useCards'
 // css
@@ -11,23 +12,33 @@ import {
     ListItemIcon,
     Grid,
     ListItem,
-    Typography
+    Typography,
+    Button
 } from '@material-ui/core'
 
 // icons
 import PhoneIcon from '@material-ui/icons/Phone';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import HomeIcon from '@material-ui/icons/Home';
+// import { database } from '../../services/firebase';
 
-
-
-
+type RoomParams = {
+    id: string;
+}
 
 export default function Cards() {
-
+    const params = useParams<RoomParams>()
+    const roomId = params.id
     const classes = useStyles();
     const { user } = useAuth()
     const { cardPhone } = useCards()
+
+    // async function handleDeleteUser(userId: string) {
+    //     if (window.confirm('Tem certeza que você deseja excluir esta pergunta?')) {
+    //       await database.ref(`phone/${roomId}/register/${userId}`).remove();
+    //     }
+    //   }
+
 
     return (
         <>
@@ -71,7 +82,7 @@ export default function Cards() {
                                         </ListItemIcon>
                                         <ListItemText>{card.emailId} </ListItemText>
                                     </ListItem>
-
+                                    <Button variant="contained" color="secondary" className={classes.button}>Excluir</Button>
                                 </CardContent>
                             </Card>
                         </Grid>

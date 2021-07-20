@@ -1,9 +1,12 @@
+
 import firebase from 'firebase/app';
 import 'firebase/firestore'
 import 'firebase/auth';
 import 'firebase/database';
 
-const firebaseConfig = {
+if(typeof window !== undefined){
+
+  const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
     databaseURL: process.env.REACT_APP_DATABASE_URL,
@@ -13,7 +16,14 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_APP_ID
   };
 
-firebase.initializeApp(firebaseConfig);
+  
+  firebase.initializeApp(firebaseConfig);
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE).then(() => {
+    console.log("successfully set the persistence") 
+  } 
+  )
+}
+
 
 const db = firebase.firestore()
 const auth = firebase.auth();
