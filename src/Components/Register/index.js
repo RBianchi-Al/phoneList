@@ -65,6 +65,7 @@ async  function onSubmit(values, actions) {
 
       });
 
+      
       history.push(`/home`)
 
       // history.push(`/home`)
@@ -76,7 +77,7 @@ async  function onSubmit(values, actions) {
       setEmail('')
       setPhone('')
   }
-
+  console.log(roomId) 
   function onBlurCep(ev, setFieldValue) {
     const { value } = ev.target;
 

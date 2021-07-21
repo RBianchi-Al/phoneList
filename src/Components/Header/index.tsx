@@ -49,7 +49,7 @@ export default function Header() {
   }
 
   function handlePhones() {
-    history.push(`/home`)
+    history.push('/home')
   }
 
 

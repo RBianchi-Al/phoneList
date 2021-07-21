@@ -22,14 +22,16 @@ type User = {
   
 export function AuthContextProvider(props: AuthContextProps){
     const [user, setUser] = useState<User>()
-    
+    console.log(`agora user na página auth ${user?.id}`)
 
-    useEffect(()=>{
-      
+    useEffect(()=>{     
+
       const unsubscript = auth.onAuthStateChanged(user => {
          if (user){
+
            const {displayName, photoURL, uid} = user
           
+           
            if(!displayName || !photoURL){
              throw new Error('Missing information from Google Account.')
            }
@@ -46,9 +48,12 @@ export function AuthContextProvider(props: AuthContextProps){
        return () => {
          unsubscript()
        }
-     }, [ ])
-     async function signInWithGoogle(){
-      
+     }, [])
+
+
+     async function signInWithGoogle(){   
+
+     
 
       const provider = new firebase.auth.GoogleAuthProvider();
       
@@ -60,22 +65,24 @@ export function AuthContextProvider(props: AuthContextProps){
           if(!displayName || !photoURL){
             throw new Error('Missing information from Google Account.')
           }
+          
+          
           setUser({
             id: uid,
             name: displayName,
             avatar: photoURL
           })
-
-        
+          
+          
       }
-
-      
     }
     
     function logOut(){
         firebase.auth().signOut()
         return setUser(undefined)
     }
+
+    
   
     return(
         <>

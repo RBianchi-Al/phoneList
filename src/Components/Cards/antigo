@@ -155,4 +155,30 @@ export default function Cards() {
             </Container>
         </>
     )
-}
+
+
+
+
+
+
+
+
+    // let comparableUserId = user
+
+    // let validator = cardPhone.map((e) => {
+    //     return (e.userId)
+    // })
+   
+
+    // function validatorUserIdAndBanco(value: any){
+    //     return comparableUserId === value ? value : 'faça login' 
+    // }
+
+    // console.log(`Vetor Completo é ${validator}}Agora: ${validatorUserId} meu user é ${comparableUserId}`)
+    
+    // async function handleDeleteUser(userId: string) {
+    //     if (window.confirm('Tem certeza que você deseja excluir esta pergunta?')) {
+    //       await database.ref(`phone/${roomId}/register/${userId}`).remove();
+    //     }
+    //   }
+

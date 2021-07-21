@@ -41,6 +41,7 @@ type CardPhone = {
 }
 
 
+
 export function useCards(){
     const [cardPhone, setCardPhone] = useState<CardPhone[]>([])
     const {user} = useAuth()
@@ -70,6 +71,9 @@ export function useCards(){
             })
 
             
+            parsePhone.map((e) => {
+                return e.userId
+            })
             setCardPhone(parsePhone)    
 
 

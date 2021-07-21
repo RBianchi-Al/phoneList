@@ -1,29 +1,42 @@
 import {FormEvent} from 'react'
-
+import { useParams } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useHistory} from 'react-router-dom';
 
 import {Avatar, 
         Button,
         CssBaseline, 
-        TextField,
         Paper,
         Grid,
         Typography
       } from "@material-ui/core"
-import {useStyles} from './styles'
+
+import {useStyles} from './styles';
+
+
+type RoomParams = {
+  id: string;
+}
 
 
 export default function Login() {
   const classes = useStyles();
   const history = useHistory();
+
   const { signInWithGoogle, user } = useAuth();
- 
+
+  const params = useParams<RoomParams>()
+  const roomId = params.id
+
+  
+
 
   async function handleLogin(event: FormEvent){
     event.preventDefault()
+    
     if (!user) {
       await signInWithGoogle()
+      console.log(roomId)
      }
     
     history.push('/home')
@@ -43,28 +56,7 @@ export default function Login() {
             Agenda Telefônica
           </Typography>
           <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Endereço de e-mail"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Senha"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
+            
             <Button
               type="submit"
               fullWidth
@@ -73,7 +65,7 @@ export default function Login() {
               className={classes.submit}
               onClick={handleLogin}
             >
-              Entrar
+              Entrar com Google 
             </Button>            
           </form>
         </div>

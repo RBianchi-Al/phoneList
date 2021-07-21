@@ -1,4 +1,3 @@
-import { useParams } from 'react-router';
 import { useAuth } from '../../hooks/useAuth';
 import { useCards } from '../../hooks/useCards'
 // css
@@ -13,7 +12,6 @@ import {
     Grid,
     ListItem,
     Typography,
-    Button
 } from '@material-ui/core'
 
 // icons
@@ -22,28 +20,21 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import HomeIcon from '@material-ui/icons/Home';
 // import { database } from '../../services/firebase';
 
-type RoomParams = {
-    id: string;
-}
 
 export default function Cards() {
-    const params = useParams<RoomParams>()
-    const roomId = params.id
     const classes = useStyles();
     const { user } = useAuth()
-    const { cardPhone } = useCards()
-
-    // async function handleDeleteUser(userId: string) {
-    //     if (window.confirm('Tem certeza que você deseja excluir esta pergunta?')) {
-    //       await database.ref(`phone/${roomId}/register/${userId}`).remove();
-    //     }
-    //   }
+    const { cardPhone } = useCards() 
 
 
     return (
         <>
+
             <Container className={classes.cardGrid} maxWidth="md" >
-                <h1>{cardPhone.length > 0 && <span> Olá {user?.name}, você tem {cardPhone.length} contatos o/ </span>}</h1>
+          
+               
+                <div>
+                    <h1>{cardPhone.length > 0 && <span> Olá {user?.name}, você tem {cardPhone.length} contatos o/ </span>}</h1>
                 <Grid container spacing={1}>
                     {cardPhone.map((card) => (
                         <Grid item key={card.id} xs={12} md={4} >
@@ -82,14 +73,18 @@ export default function Cards() {
                                         </ListItemIcon>
                                         <ListItemText>{card.emailId} </ListItemText>
                                     </ListItem>
-                                    <Button variant="contained" color="secondary" className={classes.button}>Excluir</Button>
+                                    {/* <Button variant="contained" color="secondary" className={classes.button}>Excluir</Button> */}
                                 </CardContent>
                             </Card>
                         </Grid>
+                        
                     ))}
                 </Grid>
+                
+                </div>
 
             </Container>
+            
         </>
     )
 }
