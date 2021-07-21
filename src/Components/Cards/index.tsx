@@ -34,9 +34,10 @@ export default function Cards() {
         <>
 
             <Container className={classes.cardGrid} maxWidth="md" >
-                <Search />
+               
                 <div>
                     <h1>{cardPhone.length > 0 && <span> Olá {user?.name}, você tem {cardPhone.length} contatos o/ </span>}</h1>
+                    <Search />
                     <Grid  container spacing={1}>
                         {cardPhone.map((card) => (
                             <Grid item key={card.id} xs={12} md={4} >

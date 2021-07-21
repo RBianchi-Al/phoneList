@@ -1,13 +1,9 @@
-
-/* eslint-disable no-use-before-define */
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import { useCards } from '../../hooks/useCards'
 
-// ISO 3166-1 alpha-2
-// ⚠️ No support for IE 11
 function countryToFlag(isoCode: string) {
   return typeof String.fromCodePoint !== 'undefined'
     ? isoCode
@@ -24,6 +20,10 @@ const useStyles = makeStyles({
       fontSize: 18,
     },
   },
+  box:{
+      marginBottom: '15px',
+      width: '100%'
+  }
 });
 
 export default function Search() {
@@ -32,8 +32,9 @@ export default function Search() {
 
   return (
     <Autocomplete
+        className={classes.box}
       id="country-select-demo"
-      style={{ width: 300 }}
+
       options={cardPhone as CountryType[]}
       classes={{
         option: classes.option,
@@ -77,47 +78,4 @@ interface CountryType {
     
 }
 
-
-// import TextField from '@material-ui/core/TextField';
-// import Autocomplete from '@material-ui/lab/Autocomplete';
-// import { useState} from 'react';
-// import { useCards } from '../../hooks/useCards'
-
-
-// export default function Search() {
-//     const { cardPhone } = useCards()
-    
-//         const options = cardPhone.map((option) => {
-//           const firstLetter = option.name[0].toUpperCase();
-         
-//           return {
-//             firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
-//             ...option,
-//           };
-//         });
-    
-
-//     return (
-//         <Autocomplete
-            
-//             id="combo-box-demo"
-//             // options={cardPhone}
-//             options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
-//             groupBy={(option) => option.firstLetter}
-//             getOptionLabel={(option) => option.name}
-            
-//             // getLimitTagsText={(option) => {option.numberPhone; option.name; option.adress }}
-//             // getOptionLabel={(option) => option.name}
-            
-//             // getOptionSelected={(option) => {option.numberPhone; option.name; option.adress} }
-//             // getOptionLabel={(option) => {option.numberPhone; option.name; option.adress} }
-//             style={{ width: 300 }}
-//             renderInput={(params) => 
-//             <TextField 
-//             {...params} 
-//             label="Contatos salvos" variant="outlined" />}
-//         />
-
-//     );
-// }
 
