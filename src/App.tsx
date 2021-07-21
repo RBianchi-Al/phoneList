@@ -14,10 +14,11 @@ function App() {
     <BrowserRouter>
       <AuthContextProvider>
         <Switch>
-          <PrivateRoute exact path="/home" component={Home} />
+          <PrivateRoute exact path="/home" component={Home}/>
           <Route exact path="/" component={Login} />
-          <Route exact path="/register" component={RegisterPhones} />
-          <Route path="/home" component={Home} />
+          <PrivateRoute exact path="/register" component={RegisterPhones} />
+          {/* <Route path="/home" component={Home} /> */}
+         
           <GlobalStyle />
         </Switch>
       </AuthContextProvider>

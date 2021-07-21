@@ -36,7 +36,7 @@ export default function Cards() {
             <Container className={classes.cardGrid} maxWidth="md" >
                
                 <div>
-                    <h1>{cardPhone.length > 0 && <span> Olá {user?.name}, você tem {cardPhone.length} contatos o/ </span>}</h1>
+                    <h1>{cardPhone.length > 0 && <span> Olá {user?.name}, você tem {cardPhone.length} contato(s)!</span>}</h1>
                     <Search />
                     <Grid  container spacing={1}>
                         {cardPhone.map((card) => (

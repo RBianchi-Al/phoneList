@@ -105,14 +105,15 @@ export default function Header() {
         <Divider />
         <List >
           <ListItem className={classes.menuButton}>
-            <PhoneIcon />
+            <InboxIcon />
             <ListItemText
               onClick={handleRegister}
             >Cadastrar
             </ListItemText>
           </ListItem>
-          <ListItem className={classes.menuButton}>
-            <InboxIcon />
+          <ListItem className={
+            classes.menuButton}>
+            <PhoneIcon />
             <ListItemText onClick={handlePhones}>
               Agenda
             </ListItemText>

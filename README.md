@@ -9,6 +9,11 @@ Desafio:
 - [x] Formulários de cadastro devem possuir validação front e back-end
 - [x] React, nodeJS, Firebase
 
+
+<p align="center">
+  <img width="460" height="300" src="src/Styles/apresentacao.gif">
+</p>
+
 Para rodar esse projeto, basta inserir no terminal:
 1) `yarn install`
 2) `yarn start`
