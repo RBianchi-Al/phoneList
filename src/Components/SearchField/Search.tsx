@@ -43,9 +43,12 @@ export default function Search() {
       getOptionLabel={(option) => option.name}
       renderOption={(option) => (
         <React.Fragment>
-          <span>{countryToFlag(option.name)}</span>
-          {option.numberPhone} ({option.emailId})
-
+          <span>{(option.name)}</span>
+          {option.numberPhone} | 
+          ({option.emailId} ) | 
+          ({option.adress.logradouro}, 
+          {option.numberHouse}, 
+          {option.adress.cep})
         </React.Fragment>
       )}
       renderInput={(params) => (
@@ -75,6 +78,7 @@ interface CountryType {
     emailId: string;
     name: string;
     numberPhone: string;
+    numberHouse: string | undefined;
     
 }
 
