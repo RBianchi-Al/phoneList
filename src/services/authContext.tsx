@@ -9,6 +9,7 @@ type User = {
     id: string;
     name?: string;
     avatar?: string;
+    phoneNumber?: string | null | undefined;
   }
   type AuthContextType = {
     user: User | undefined;
@@ -29,7 +30,7 @@ export function AuthContextProvider(props: AuthContextProps){
       const unsubscript = auth.onAuthStateChanged(user => {
          if (user){
 
-           const {displayName, photoURL, uid} = user
+           const {displayName, photoURL, uid, phoneNumber} = user
           
            
            if(!displayName || !photoURL){
@@ -38,7 +39,8 @@ export function AuthContextProvider(props: AuthContextProps){
            setUser({
              id: uid,
              name: displayName,
-             avatar: photoURL
+             avatar: photoURL,
+             phoneNumber: phoneNumber
 
            })
          
